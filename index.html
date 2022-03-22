@@ -54,7 +54,7 @@ var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46,data1]);
 var msgLengh = 8; 
      
         
-        // writeChar();
+        writeChar();
 	function writeChar() {
 		var can = document.getElementById("canvas");
 		var ctx = can.getContext('2d');
@@ -96,13 +96,13 @@ var msgLengh = 8;
 		var l=128; var cd;
 		for (let n=0; n<msgStr.lengh; n++) { 
 			cd = msgStr.charCodeAt(k);
-			if (cd==0x0A) {
+			if (cd==10) {
 				i=0; j++; k++;
 				if (j>50){i=0; j=0}
 			} else {
 				cx=(cw)*i;
 				cy=(ch)*j;
-				oh=cd-0x20;
+				oh=cd-32;
 				putChar();
 				i++; k++;
 				if (i>25){i=0; j++;}
