@@ -50,8 +50,8 @@ var data1;
 	
 var msgBuf = new ArrayBuffer(256);
 var msgView = new Uint8Array(msgBuf);
-var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46]);
-var msgLengh = 8; 
+var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46,0x47]);
+var msgLength = 8; 
      
         
         writeChar();
@@ -59,7 +59,7 @@ var msgLengh = 8;
 		var can = document.getElementById("canvas");
 		var ctx = can.getContext('2d');
 		var i=0; var j=0; var k=0;
-		for (let n=0; n<msgLengh; n++) {
+		for (let n=0; n<msgLength; n++) {
 			if (msgArr[k]==0x0A) {
 				i=0; j++; k++;
 				if (j>50){i=0; j=0}
@@ -94,7 +94,7 @@ var msgLengh = 8;
 		var ctx = can.getContext('2d');
 		var i=0; var j=0; var k=0; 
 		var l=128; var cd;
-		for (let n=0; n<msgStr.lengh; n++) { 
+		for (let n=0; n<msgStr.length; n++) { 
 			cd = msgStr.charCodeAt(k);
 			if (cd==0x0A) {
 				i=0; j++; k++;
