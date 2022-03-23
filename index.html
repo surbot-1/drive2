@@ -119,12 +119,11 @@ var msgbot =[[[""],
 	
 	
 function chatbot() { 
-	var mbot = document.getElementById("inField").value; 
-	// if (mbot.charCodeAt((mbot.length)-1)==("?".charCodeAt(0))) { 
-		var nbot = mbot.slice(0, (mbot.length)-1); 
-                // mbot=nbot;
-		document.getElementById("div1").innerHTML += "<br>" + mbot +" "+ nbot +" "+   mbot.charAt((mbot.length)-1)  ;
-	// }
+	var nbot = document.getElementById("inField").value; 
+	// if (nbot.charCodeAt((nbot.length)-1)==("?".charCodeAt(0))) { 
+		var mbot = mbot.slice(0, (mbot.length)-2); 
+		document.getElementById("div1").innerHTML += "<br>" + mbot +" "+ nbot +" "+   mbot.charAt((mbot.length)-2)  ;
+	// } else {mbot=nbot;}
 	var rbot; 
 	var b=false;
 	for(let i=0; i<16; i++) { 
