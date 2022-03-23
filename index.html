@@ -121,9 +121,9 @@ var msgbot =[[[""],
 function chatbot() { 
 	var mbot = document.getElementById("inField").value; 
 	// if (mbot.charCodeAt((mbot.length)-1)==("?".charCodeAt(0))) { 
-		var nbot = mbot.slice(0, (mbot.length)-1); 
+		var nbot = mbot.slice(0, (mbot.length)-2); 
 		mbot=nbot;
-		document.getElementById("div1").innerHTML += "<br>" + mbot +" "+ nbot;
+		document.getElementById("div1").innerHTML += "<br>" + mbot +" "+ nbot +" "+   (mbot.charCodeAt((mbot.length)-1)  ;
 	// }
 	var rbot; 
 	var b=false;
