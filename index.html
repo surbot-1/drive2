@@ -74,6 +74,9 @@ var msgSt = false;
 var tmr1;  
 var tmr2;
 
+var driveBuf = new ArrayBuffer(128*1024*1024);
+var driveView = new Uint8Array(driveBuf);
+	
 var dBuf = new ArrayBuffer(512);
 var dView = new Uint8Array(dBuf);
 var dtbn=0x00C00000; // data begin at cluster no. 2048
@@ -112,7 +115,8 @@ function initGetMsg() {
          initiate();
 function initiate() { 
 	driveFormatter();
-	initGetMsg();
+	initGetMsg(); 
+	fileViewer();
 }
 
 </script>
@@ -373,8 +377,6 @@ function fileManager() {
 	
 // driveFormatter();
 function driveFormatter() {
-var driveBuf = new ArrayBuffer(128*1024*1024);
-var driveView = new Uint8Array(driveBuf);
  // Master Boot Record 1MB =2048 sectors
         driveView[0x0000010B+0x0B] = 0x00; // partition1 address LSB 0x00008000
 	driveView[0x0000010B+0x0C] = 0x08; // partition1 address     8*(16*16*16) sector no.
