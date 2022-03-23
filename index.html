@@ -62,6 +62,23 @@ document.getElementById("div1").appendChild(button1);
 
 </script>
 	
+	
+<script>
+	
+var msgBuf = new ArrayBuffer(256);
+var msgView = new Uint8Array(msgBuf);
+var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46,0x47]);
+var msgLength = 8; 
+	
+var cw=24; var ch=32;
+var sw=4; var sh=8;
+var cxi=0; var cxf=1080;
+var cx=0; var cy=0;
+var oh=0x41-0x20;
+var data1;
+	
+</script>
+	
 			
 <script>
 // mbot = mbot[i][0][j]; // 
@@ -123,7 +140,7 @@ function chatbot() {
 	var mbot;
 	if (nbot.charCodeAt((nbot.length)-1)==(" ".charCodeAt(0))) { 
 		mbot = nbot.slice(0, (nbot.length)-1); 
-		// document.getElementById("div1").innerHTML += "<br>" + nbot +" "+ mbot +" "+   nbot.charAt((nbot.length)-1)  ;
+		// document.getElementById("div1").innerHTML += "<br>" + nbot +" "+ mbot; 
 	} else {mbot=nbot;}
 	var rbot; 
 	var b=false;
@@ -147,11 +164,11 @@ function chatbot() {
        // var text = "?";
        // document.getElementById("div1").innerHTML += "<br>" + (text.charAt(0));
 }
-	
-initiate();
-function initiate() { 
+	 
+	initiate1();
+function initiate1() { 
 	var t = setInterval( function() { 
-		document.getElementById("button1").addEventListener('click',chatbot); 
+		document.getElementById("button1").addEventListener('click',readMessage); 
 	}, 0100);
 }
 
@@ -160,27 +177,12 @@ function initiate() {
 
 	
 	
-<script>
-	
-var cw=24; var ch=32;
-var sw=4; var sh=8;
-var cxi=0; var cxf=1080;
-var cx=0; var cy=0;
-var oh=0x41-0x20;
-var data1;
-	
-</script>
+
 	
 	
 <script>
 	
-	alert('1');
-var msgBuf = new ArrayBuffer(256);
-var msgView = new Uint8Array(msgBuf);
-var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46,0x47]);
-var msgLength = 8; 
-     
-        
+       
          writeChar();
 	function writeChar() {
 		var can = document.getElementById("canvas");
@@ -280,6 +282,17 @@ var msgLength = 8;
 		ctx.fillStyle = "blue";
 		ctx.fillRect(cx-24, cy, 2, 32);
 	} 
+	
+</script>
+
+	
+<script>
+// initiate();
+function initiate() { 
+	var t = setInterval( function() { 
+		document.getElementById("button1").addEventListener('click',chatbot); 
+	}, 0100);
+}
 	
 </script>
 	
