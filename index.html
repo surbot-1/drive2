@@ -58,16 +58,16 @@ input2.setAttribute("id", "submit");
 // input2.setAttribute("id", "textField"));
 // input2.setAttribute("height", "2176");  // 2400-112-112=2176
 // input2.setAttribute("border", "solid black 1px");
-document2.getElementById("div1").appendChild(input2); 
+document.getElementById("div1").appendChild(input2); 
 
 </script>
 	
 			
 <script>
-// msgbot = mbot[i][0][j]; // 
-// rplbot = mbot[i][1][j]; //
+// mbot = mbot[i][0][j]; // 
+// rbot = mbot[i][1][j]; //
 // 
-var mbot = [[[""],
+var msgbot = [[[""],
 	     ["HAVE A NICE DAY\nTHANK YOU"]],
 	    [["HI"],
 	     ["HI"]],
@@ -114,10 +114,24 @@ var mbot = [[[""],
 	
 	
 <script>
-
-function AscToStr(asc) {
-	var str = "
+	
+	
+function chatbot() { 
+	var mbot = document.getElementById("textField").value; 
+	var rbot; 
+	var b=false;
+	for(let i=0; i<10; i++) { 
+		for(let j=0; j<1; j++) {
+			if(mbot==msgbot[i][0]) { 
+				rbot=[i][1]; b=true; break;
+			}
+		} 
+		if(b) {break;}
+	}
+	document.getElementById("div1").innerHTML += "<br>" + rbot;
 }
+	
+document.getElementById("submit").addEventListener('click','chatbot');
 	
 </script>
 
