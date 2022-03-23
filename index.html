@@ -123,9 +123,16 @@ function chatbot() {
 	var rbot; 
 	var b=false;
 	for(let i=0; i<16; i++) { 
-		for(let j=0; j<1; j++) {
+		for(let j=0; j<1; j++) { 
+			/*
+			if (mbot.charCoadAt((mbot[i][0].length)-1)==63) {
+				for(let k=0; k<(msgbot[i][0].length)-2; k++) { 
+					var tmbot+=msgbot[i][0].charCoadAt(k); 
+				} 
+			} */
+			
 			if(mbot==msgbot[i][0]) { 
-				rbot=msgbot[i][1]; b=true; break;
+			rbot=msgbot[i][1]; b=true; break; 
 			}
 		} 
 		if(b) {break;}
