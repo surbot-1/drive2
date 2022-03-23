@@ -123,11 +123,12 @@ function chatbot() {
 	for(let i=0; i<10; i++) { 
 		for(let j=0; j<1; j++) {
 			if(mbot==msgbot[i][0]) { 
-				rbot=[i][1]; b=true; break;
+				rbot=msgbot[i][1]; b=true; break;
 			}
 		} 
 		if(b) {break;}
-	}
+	} 
+	if(!b) {rbot=msgbot[0][1];}
 	document.getElementById("div1").innerHTML += "<br>" + rbot;
 }
 	
