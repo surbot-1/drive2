@@ -123,6 +123,7 @@ function chatbot() {
 	if (mbot.charCodeAt((mbot.length)-1)==("?".charCodeAt(0))) { 
 		var nbot = mbot.slice(0, (mbot.length)-1); 
 		mbot=nbot;
+		document.getElementById("div1").innerHTML += "<br>" + mbot +" "+ nbot;
 	}
 	var rbot; 
 	var b=false;
