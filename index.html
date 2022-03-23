@@ -330,7 +330,10 @@ function initChatbot() {
 	
 <script>
 	
-function fileViewer() {
+function fileViewer() { 
+	for (let i=0; i<512; i++) {
+		document.getElementById("div1").innerHTML += "<br>"+driveView[0x00C00000+i]; 
+	}
 }
 	
 </script>
@@ -359,8 +362,8 @@ function fileManager() {
 		var pos0c= mz+vz+fz+fz-cz-cz; 
 		var posdc= pos0c+cz+cz+dz;
 		driveView[posdc+k+i]=dView[i]; 
-		j++; k=cz*j;
-	}
+	} 
+	j++; k=cz*j;
 }
 	
 </script>
