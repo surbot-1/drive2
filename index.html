@@ -69,6 +69,9 @@ var msgBuf = new ArrayBuffer(256);
 var msgView = new Uint8Array(msgBuf);
 var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46,0x47]);
 var msgLength = 8; 
+var msgIn; 
+var msgSt = false;
+var timer1;
 	
 var cw=24; var ch=32;
 var sw=4; var sh=8;
@@ -78,8 +81,30 @@ var oh=0x41-0x20;
 var data1;
 	
 </script>
+
+
+<script>
 	
-			
+function getMessage() { 
+	msgIn = document.getElementById("inField").value; 
+	msgSt = true;
+}
+	
+function initGetMsg() { 
+	timer1 = setInterval( function() { 
+		document.getElementById("button1").addEventListener('click',getMessage); 
+	}, 0100);
+}
+	
+	initiate();
+function initiate() { 
+	driveFormatter();
+	initGetMsg();
+}
+
+</script>
+	
+	
 <script>
 // mbot = mbot[i][0][j]; // 
 // rbot = mbot[i][1][j]; //
@@ -160,15 +185,13 @@ function chatbot() {
 		if(b) {break;}
 	} 
 	if(!b) {rbot=msgbot[0][1];}
-	document.getElementById("div1").innerHTML += "<br>" + rbot;
-       // var text = "?";
-       // document.getElementById("div1").innerHTML += "<br>" + (text.charAt(0));
+	document.getElementById("div1").innerHTML += "<br>" + rbot; 
 }
 	 
 	initiate1();
 function initiate1() { 
-	var t = setInterval( function() { 
-		document.getElementById("button1").addEventListener('click',readMessage); 
+	timer1 = setInterval( function() { 
+		document.getElementById("button1").addEventListener('click',chatbot); 
 	}, 0100);
 }
 
@@ -287,12 +310,7 @@ function initiate1() {
 
 	
 <script>
-// initiate();
-function initiate() { 
-	var t = setInterval( function() { 
-		document.getElementById("button1").addEventListener('click',chatbot); 
-	}, 0100);
-}
+	
 	
 </script>
 	
