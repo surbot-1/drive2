@@ -120,6 +120,10 @@ var msgbot =[[[""],
 	
 function chatbot() { 
 	var mbot = document.getElementById("inField").value; 
+	if (mbot.charAt((mbot.length)-1)=="?") { 
+		var nbot = mbot.slice(0, mbot.length); 
+		mbot=nbot;
+	}
 	var rbot; 
 	var b=false;
 	for(let i=0; i<16; i++) { 
@@ -140,7 +144,7 @@ function chatbot() {
 	if(!b) {rbot=msgbot[0][1];}
 	document.getElementById("div1").innerHTML += "<br>" + rbot;
         var text = "?";
-	document.getElementById("div1").innerHTML += "<br>" + (text.charCodeAt(0));
+	document.getElementById("div1").innerHTML += "<br>" + (text.charAt(0));
 }
 	
 initiate();
