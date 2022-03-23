@@ -65,20 +65,28 @@ document.getElementById("div1").appendChild(button1);
 	
 <script>
 	
-var msgBuf = new ArrayBuffer(256);
+var msgBuf = new ArrayBuffer(512);
 var msgView = new Uint8Array(msgBuf);
 var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46,0x47]);
-var msgLength = 8; 
+var msgLn = 8; 
 var msgIn; 
 var msgSt = false;
-var timer1;
+var tmr1;  
+var tmr2;
+
+var dBuf = new ArrayBuffer(512);
+var dView = new Uint8Array(dBuf);
+var dtbn=0x00C00000; // data begin at cluster no. 2048
+var clsz=0x00001000; // cluster size 4KB=4096B
+var scsz=0x00000200; // sector size 512B
+var clno=0; // cluster no
+var scno=0; // sector no
 	
 var cw=24; var ch=32;
 var sw=4; var sh=8;
 var cxi=0; var cxf=1080;
 var cx=0; var cy=0;
 var oh=0x41-0x20;
-var data1;
 	
 </script>
 
@@ -87,16 +95,21 @@ var data1;
 	
 function getMessage() { 
 	msgIn = document.getElementById("inField").value; 
-	msgSt = true;
+	for (let i=0; i<msgIn.length; i++) { 
+		dView[i]=msgIn.charCodeAt(i); 
+		msgSt = true; 
+		fileManager();
+	}
+	
 }
 	
 function initGetMsg() { 
-	timer1 = setInterval( function() { 
+	tmr1 = setInterval( function() { 
 		document.getElementById("button1").addEventListener('click',getMessage); 
 	}, 0100);
 }
 	
-	initiate();
+         initiate();
 function initiate() { 
 	driveFormatter();
 	initGetMsg();
@@ -106,8 +119,8 @@ function initiate() {
 	
 	
 <script>
-// mbot = mbot[i][0][j]; // 
-// rbot = mbot[i][1][j]; //
+// mbot = msgbot[i][0][j]; // 
+// rbot = msgbot[i][1][j]; //
 // 
 var msgbot =[[[""],
 	     ["Have a nice day\nThank you"]],
@@ -190,7 +203,7 @@ function chatbot() {
 	 
 	initChatbot();
 function initChatbot() { 
-	timer1 = setInterval( function() { 
+	tmr2 = setInterval( function() { 
 		document.getElementById("button1").addEventListener('click',chatbot); 
 	}, 0100);
 }
@@ -325,7 +338,29 @@ function fileViewer() {
 	
 <script>
 
-function fileManager() {
+function fileManager() { 
+	var mbrsz=0x0000800; // (sectors) size of master boot record
+	var vbrsz=0x0000800; // (sectors) soze of partition boot record
+	var ftsz=0x00000800; // (sectors) fat table size
+	var dtbn=0x00C00000; // (absolute) data begin at cluster no. 2048
+        var drsz=0x00000800; // (clusters) directory size
+	var clsz=0x00000008; // (sectors) cluster size 4KB=4096B
+	var scsz=0x00000200; // (Bytes) sector size 512B 
+	var clno=0; // cluster no
+	var scno=0; // sector no 
+	var j=0; var k=0;
+	for (let i=0; i<clsz; i++) { 
+                var sz=512;
+                var cz=8*sz; 
+		var mz=2048*sz; 
+		var vz=2048*sz; 
+		var fz=2048*sz; 
+		var dz=2048*8*sz; 
+		var pos0c= mz+vz+fz+fz-cz-cz; 
+		var posdc= pos0c+dz;
+		driveView[posdc+k+i]=dView[i]; 
+		j++; k=cz*j;
+	}
 }
 	
 </script>
@@ -337,14 +372,14 @@ function fileManager() {
 function driveFormatter() {
 var driveBuf = new ArrayBuffer(128*1024*1024);
 var driveView = new Uint8Array(driveBuf);
- // Master Boot Record 1MB =2024 sectors
+ // Master Boot Record 1MB =2048 sectors
         driveView[0x0000010B+0x0B] = 0x00; // partition1 address LSB 0x00008000
 	driveView[0x0000010B+0x0C] = 0x08; // partition1 address     8*(16*16*16) sector no.
 	driveView[0x0000010B+0x0D] = 0x00; // partition1 address     8*16*16*16*512 Bytes
 	driveView[0x0000010B+0x0E] = 0x00; // partition1 address MSB 16*16*16*16*16*16 = 0x00100000
 	driveView[0x000001FE+0x00] = 0xAA; // signature
 	driveView[0x000001FF+0x01] = 0x55; // 
-// Partition Volume Boot Record 1MB =2024 sectors
+// Partition Volume Boot Record 1MB =2048 sectors
 	driveView[0x00100000+0x0B] = 0x00; // no of bytes per sector
 	driveView[0x00100000+0x0C] = 0x02; // 2*256=512
 	driveView[0x00100000+0x0D] = 0x08; // no of sectors per cluster 8
@@ -356,33 +391,33 @@ var driveView = new Uint8Array(driveBuf);
 	driveView[0x00100000+0x26] = 0x08; // 
 	driveView[0x00100000+0x27] = 0x00; // 
 	driveView[0x00200000+0x0C] = 0x02; // no of cluster before root directory 2
-// FAT1 1MB =2024 sectors. each 4Bytes=32bits
-	driveView[0x00200000+0x00] = 0xF8; // signature
+// FAT1 1MB =2048 sectors. each 4Bytes=32bits
+	driveView[0x00200000+0x00] = 0xF0; // signature
 	driveView[0x00200000+0x01] = 0xFF; // 
 	driveView[0x00200000+0x02] = 0xFF; // 
 	driveView[0x00200000+0x03] = 0x0F; // 
 	driveView[0x00200000+0x04] = 0xFF; // fixed
 	driveView[0x00200000+0x05] = 0xFF; // 
 	driveView[0x00200000+0x06] = 0xFF; // 
-	driveView[0x00200000+0x07] = 0xFF; // 
-	driveView[0x00200000+0x04] = 0x0F; // end of cluster
+	driveView[0x00200000+0x07] = 0x0F; // 
+	driveView[0x00200000+0x04] = 0xFF; // end of cluster
 	driveView[0x00200000+0x05] = 0xFF; // 
 	driveView[0x00200000+0x06] = 0xFF; // 
-	driveView[0x00200000+0x07] = 0xFF; // 
-// FAT2 1MB =2024 sectors. each 4Bytes=32bits
-	driveView[0x00300000+0x00] = 0xF8; // signature
+	driveView[0x00200000+0x07] = 0x0F; // 
+// FAT2 1MB =2048 sectors. each 4Bytes=32bits
+	driveView[0x00300000+0x00] = 0xF0; // signature
 	driveView[0x00300000+0x01] = 0xFF; // 
 	driveView[0x00300000+0x02] = 0xFF; // 
 	driveView[0x00300000+0x03] = 0x0F; // 
 	driveView[0x00300000+0x04] = 0xFF; // fixed
 	driveView[0x00300000+0x05] = 0xFF; // 
 	driveView[0x00300000+0x06] = 0xFF; // 
-	driveView[0x00300000+0x07] = 0xFF; // 
-	driveView[0x00300000+0x04] = 0x0F; // end of cluster
+	driveView[0x00300000+0x07] = 0x0F; // 
+	driveView[0x00300000+0x04] = 0xFF; // end of cluster
 	driveView[0x00300000+0x05] = 0xFF; // 
 	driveView[0x00300000+0x06] = 0xFF; // 
-	driveView[0x00300000+0x07] = 0xFF; //
-// root directory 8MB =2024 clusters =8*2024 =16192 sectors. each 32Bytes
+	driveView[0x00300000+0x07] = 0x0F; //
+// root directory 8MB =2048 clusters =8*2024 =16192 sectors. each 32Bytes
 	driveView[0x00400000+0x00] = 0x41; // 8B name
 	driveView[0x00400000+0x01] = 0x42; // 
 	driveView[0x00400000+0x02] = 0x43; // 
