@@ -349,13 +349,13 @@ function fileManager() {
 	var clno=0; // cluster no
 	var scno=0; // sector no 
 	var j=0; var k=0;
-	for (let i=0; i<clsz; i++) { 
+	for (let i=0; i<512; i++) { 
                 var sz=512;
                 var cz=8*sz; 
 		var mz=2048*sz; 
 		var vz=2048*sz; 
 		var fz=2048*sz; 
-		var dz=2048*8*sz; 
+		var dz=2048*cz; 
 		var pos0c= mz+vz+fz+fz-cz-cz; 
 		var posdc= pos0c+dz;
 		driveView[posdc+k+i]=dView[i]; 
