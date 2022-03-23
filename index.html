@@ -73,7 +73,7 @@ var msgbot =[[[""],
 	     ["Hi"]],
 	    [["Hello"],
 	     ["Hello"]],
-	    [["How are you"], // ?
+	    [["How are you?"], // ?
 	     ["I am fine. you?"]],
 	    [["I am fine"],
 	     ["Good"]],
@@ -81,19 +81,19 @@ var msgbot =[[[""],
 	     ["Thank you"]],
 	    [["Thank you"],
 	     ["Welcome"]],
-	    [["What are you doing"], // ? 
+	    [["What are you doing?"], // ? 
 	     ["Enjoying the real world. How beautiful this is!"]],
 	    [["Good morning"],
 	     ["Good morning"]],
 	    [["Good evening"],
 	     ["Good evening"]],
-	    [["What is your name"], // ? 
+	    [["What is your name?"], // ? 
 	     ["My name is sAy"]],
 	    [["Tell me yourself"],
 	     ["I am sAy. I am a chatbot integrated with AI and ML."]],
-	    [["What is your favorite color"], // ? 
+	    [["What is your favorite color?"], // ? 
 	     ["My favorite color is blue"]],
-	    [["What is your age"], // ? 
+	    [["What is your age?"], // ? 
 	     ["I am a software. I have been created when you installed the sAy app."]],
 	    [[""],
 	     [""]],
@@ -121,10 +121,10 @@ var msgbot =[[[""],
 function chatbot() { 
 	var nbot = document.getElementById("inField").value; 
 	var mbot;
-	//if (nbot.charCodeAt((nbot.length)-1)==("?".charCodeAt(0))) { 
+	if (nbot.charCodeAt((nbot.length)-1)==(" ".charCodeAt(0))) { 
 		mbot = nbot.slice(0, (nbot.length)-1); 
-		document.getElementById("div1").innerHTML += "<br>" + nbot +" "+ mbot +" "+   nbot.charAt((nbot.length)-1)  ;
-	//} else {mbot=nbot;}
+		// document.getElementById("div1").innerHTML += "<br>" + nbot +" "+ mbot +" "+   nbot.charAt((nbot.length)-1)  ;
+	} else {mbot=nbot;}
 	var rbot; 
 	var b=false;
 	for(let i=0; i<16; i++) { 
