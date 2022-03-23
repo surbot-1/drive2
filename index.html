@@ -234,7 +234,7 @@ function initChatbot() {
 	}
 	
 	
-	alert('2');
+	alert('1');
 
          // putChar();
 	function putChar() {
@@ -273,7 +273,7 @@ function initChatbot() {
 	
 	
 <script>
-        alert('1');
+        alert('2');
         
 	
 	writeAsc();
@@ -343,7 +343,7 @@ var driveView = new Uint8Array(driveBuf);
 	driveView[0x0000010B+0x0D] = 0x00; // partition1 address     8*16*16*16*512 Bytes
 	driveView[0x0000010B+0x0E] = 0x00; // partition1 address MSB 16*16*16*16*16*16 = 0x00100000
 	driveView[0x000001FE+0x00] = 0xAA; // signature
-	driveView[0x000001FF+0x01] = 0x55; // 1MB
+	driveView[0x000001FF+0x01] = 0x55; // 
 // Partition Volume Boot Record 1MB =2024 sectors
 	driveView[0x00100000+0x0B] = 0x00; // no of bytes per sector
 	driveView[0x00100000+0x0C] = 0x02; // 2*256=512
