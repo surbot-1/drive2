@@ -120,7 +120,7 @@ var msgbot =[[[""],
 	
 function chatbot() { 
 	var mbot = document.getElementById("inField").value; 
-	if (mbot.charAt((mbot.length)-1)=="?") { 
+	if (mbot.charCodeAt((mbot.length)-1)==("?".charCodeAt(0))) { 
 		var nbot = mbot.slice(0, (mbot.length)-1); 
 		mbot=nbot;
 	}
