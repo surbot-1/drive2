@@ -131,7 +131,13 @@ function chatbot() {
 	document.getElementById("div1").innerHTML += "<br>" + rbot;
 }
 	
-document.getElementById("button1").addEventListener('click',chatbot);
+initiate();
+function initiate() { 
+	var t = setInterval( function() { 
+		document.getElementById("button1").addEventListener('click',chatbot); 
+	}, 0100);
+}
+
 	
 </script>
 
