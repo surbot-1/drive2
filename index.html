@@ -135,20 +135,11 @@ function initGetMsg() {
 	}, 0100);
 }
 	
-initChatbot();
 function initChatbot() { 
 	tmr2 = setInterval( function() { 
 		document.getElementById("button1").addEventListener('click',chatbot); 
 	}, 0100);
-}
-	
-	writeAsc();
-        initiate();
-function initiate() { 
-	driveFormatter();
-	initGetMsg(); 
-	fileViewer();
-}
+}	       
 
 </script>
 	
@@ -509,6 +500,20 @@ function driveFormatter() {
       // driveView[0x00C00000+0x08] = 0x42; // data
        data1 = driveView[0x00C00000+0x03]; // data
 	
+}
+	
+</script>
+	
+	
+<script>  
+	
+initiate();
+function initiate() { 
+	writeAsc();
+	initChatbot();
+	driveFormatter();
+	initGetMsg(); 
+	fileViewer();
 }
 	
 </script>
