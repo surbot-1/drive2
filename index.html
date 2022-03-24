@@ -484,7 +484,7 @@ function driveFormatter() {
 function fileViewer() { 
 	document.getElementById("div1").innerHTML += "<br>" ; 
 	for (let i=0; i<msgLn; i++) { 
-		var char = AscTable[(driveView[0x00C00000+i])-32]; // dtab
+		var char = AscTable[((driveView[0x00C00000+i])-32)]; // dtab
 		document.getElementById("div1").innerHTML += char ; 
 	}
 }
