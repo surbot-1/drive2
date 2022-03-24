@@ -493,8 +493,8 @@ function getMessage() {
 	msgSt = true; 
 }
 	       
-set();
-function set() { 
+initSet();
+function initSet() { 
 	writeAsc(); 
 	driveFormatter();
 }
@@ -506,8 +506,8 @@ function initiate() {
 	fileViewer();
 } 
 	
-start();
-function start() { 
+startAcn();
+function startAcn() { 
 	tmr1 = setInterval( function() { 
 		document.getElementById("button1").addEventListener('click',initiate); 
 	}, 0100);
