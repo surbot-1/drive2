@@ -488,10 +488,10 @@ function driveFormatter() {
 	
 function getMessage() { 
 	msgIn = document.getElementById("inField").value; 
-	for (let i=0; i<msgIn.length; i++) { 
+	for (let i=0; i<(msgIn.length); i++) { 
 		dView[i]=msgIn.charCodeAt(i); 
-		msgSt = true; 
-	}
+	} 
+	msgSt = true; 
 }
 	       
 set();
