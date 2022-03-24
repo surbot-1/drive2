@@ -86,7 +86,7 @@ var clno=0; // cluster no
 var scno=0; // sector no
 	
 var driveab=0x00000000; 
-var mbrof=driveab; 
+var mbrofdvab=driveab; 
 var vbrofmbr=0;
 var ftofvbr=0; 
 var drofft=0; 
@@ -381,7 +381,7 @@ function fileManager() {
 	var j=0; var k=0;
 	for (let i=0; i<512; i++) { 
 		var driveab=0x00000000; 
-		var mbrof=driveab; 
+		var mbrofdvab=driveab; 
 		var vbrofmbr=0;
 		var ftofvbr=0; 
 		var drofft=0; 
