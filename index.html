@@ -491,32 +491,30 @@ function getMessage() {
 	for (let i=0; i<msgIn.length; i++) { 
 		dView[i]=msgIn.charCodeAt(i); 
 		msgSt = true; 
-		fileManager();
 	}
 	
 }
-	
-function initGetMsg() { 
-	tmr1 = setInterval( function() { 
-		document.getElementById("button1").addEventListener('click',getMessage); 
-	}, 0100);
+	       
+set();
+function set() { 
+	writeAsc(); 
+	driveFormatter();
 }
 	
-function initChatbot() { 
-	tmr2 = setInterval( function() { 
-		document.getElementById("button1").addEventListener('click',chatbot); 
-	}, 0100);
-}	       
-
-	
-initiate();
 function initiate() { 
-	writeAsc();
-	initGetMsg();
-	initChatbot();
-	driveFormatter(); 
+	getMessage();
+	chatbot();
+	fileManager();
 	fileViewer();
+} 
+	
+start();
+function start() { 
+	tmr1 = setInterval( function() { 
+		document.getElementById("button1").addEventListener('click',initiate); 
+	}, 0100);
 }
+
 	
 </script>
 	
