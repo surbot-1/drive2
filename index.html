@@ -357,7 +357,14 @@ function fileManager() {
 	var scno=0; // sector no 
 	var j=0; var k=0;
 	for (let i=0; i<512; i++) { 
-		var driveab=0x00000000;
+		var driveab=0x00000000; 
+		var mbrof=driveab; 
+		var vbrofmbr=0;
+		var ftofvbr=0; 
+		var drofft=0; 
+		var dtofdr=0; 
+		var scofmbr=driveab; 
+		var clofvbr=0;
                 var scsz=512;
                 var clsz=8*sz; 
 		var mbrsz=2048*scsz; 
