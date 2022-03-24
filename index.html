@@ -70,7 +70,8 @@ var msgView = new Uint8Array(msgBuf);
 var msgArr = new Uint8Array ([0x41,0x42,0x43,0x44,0x45,0x0A,0x46,0x47]); 
 var msgStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 var msgLn = 8; 
-var msgIn; 
+var msgInBuf = new ArrayBuffer(512);
+var msgIn = new Uint8Array(msgInBuf); 
 var msgSt = false;
 var tmr1;  
 var tmr2;
@@ -476,7 +477,7 @@ function driveFormatter() {
 <script>
 	
 function fileViewer() { 
-	for (let i=0; i<512; i++) { 
+	for (let i=0; i<msgIn.length; i++) { 
 		var char = AscTable[(driveView[dtab+i])-32];
 		document.getElementById("div1").innerHTML += char ; 
 	}
@@ -489,7 +490,7 @@ function fileViewer() {
 	
 function fileManager() { 
 	var j=0; var k=0;
-	for (let i=0; i<512; i++) { 
+	for (let i=0; i<msgIn.length; i++) { 
 		driveView[dtab+k+i]=dView[i]; 
 	} 
 	j++; k=clsz*j;
