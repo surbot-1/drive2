@@ -80,11 +80,18 @@ var driveView = new Uint8Array(driveBuf);
 	
 var dBuf = new ArrayBuffer(512);
 var dView = new Uint8Array(dBuf);
-var dtbgn=0x00C00000; // data begin at cluster no. 2048
-var clsize=0x00001000; // cluster size 4KB=4096B
-var scsize=0x00000200; // sector size 512B
+	
+var mbrsz_s=0x00000800; // (sectors) size of master boot record
+var vbrsz_s=0x00000800; // (sectors) soze of partition boot record
+var ftsz_s=0x00000800; // (sectors) fat table size 2048
+var dtab_c=0x00000800; // (absolute) data begin at cluster no. 2048
+var dtab_b=0x00C00000; // data begin 
+var drsz_c=0x00000800; // (clusters) directory size 2048 
+var clsz_s=0x00000008; // (sectors) cluster size 4KB=4096B
+var clsz_b=0x00001000; // cluster size 4KB=4096B
+var scsz_b=0x00000200; // (Bytes) sector size 512B 
 var clno=0; // cluster no
-var scno=0; // sector no
+var scno=0; // sector no 
 	
 var driveab=0x00000000; 
 var mbrofdvab=driveab; 
@@ -119,8 +126,30 @@ alert('1');
 
 
 <script>
-	
-	
+/*
+var driveab=0x00000000; 
+var mbrofdvab=driveab; 
+var vbrofmbr=0;
+var ftofvbr=0; 
+var drofft=0; 
+var dtofdr=0; 
+var scofmbr=driveab; 
+var clofvbr=0;
+var scsz=512;
+var clsz=8*scsz; 
+var mbrsz=2048*scsz; 
+var vbrsz=2048*scsz; 
+var ftsz=2048*scsz; 
+var drsz=2048*clsz; 
+var dtsz=128*drsz; // or 1024*ftsz 
+var mbrab=driveab; 
+var scab=driveab;
+var vbrab=driveab+mbrsz; 
+var ftab=vbrab+vbrsz;
+var clab= ftab+ftsz+ftsz-clsz-clsz; 
+var drab= clab+clsz+clsz;
+var dtab= drab+drsz;
+*/
 </script>
 	
 	
@@ -335,39 +364,8 @@ function fileViewer() {
 <script>
 
 function fileManager() { 
-	var mbrsz=0x0000800; // (sectors) size of master boot record
-	var vbrsz=0x0000800; // (sectors) soze of partition boot record
-	var ftsz=0x00000800; // (sectors) fat table size
-	var dtbn=0x00C00000; // (absolute) data begin at cluster no. 2048
-        var drsz=0x00000800; // (clusters) directory size
-	var clsz=0x00000008; // (sectors) cluster size 4KB=4096B
-	var scsz=0x00000200; // (Bytes) sector size 512B 
-	var clno=0; // cluster no
-	var scno=0; // sector no 
 	var j=0; var k=0;
 	for (let i=0; i<512; i++) { 
-		var driveab=0x00000000; 
-		var mbrofdvab=driveab; 
-		var vbrofmbr=0;
-		var ftofvbr=0; 
-		var drofft=0; 
-		var dtofdr=0; 
-		var scofmbr=driveab; 
-		var clofvbr=0;
-                var scsz=512;
-                var clsz=8*scsz; 
-		var mbrsz=2048*scsz; 
-		var vbrsz=2048*scsz; 
-		var ftsz=2048*scsz; 
-		var drsz=2048*clsz; 
-		var dtsz=128*drsz; // or 1024*ftsz 
-		var mbrab=driveab; 
-		var scab=driveab;
-		var vbrab=driveab+mbrsz; 
-		var ftab=vbrab+vbrsz;
-		var clab= ftab+ftsz+ftsz-clsz-clsz; 
-		var drab= clab+clsz+clsz;
-		var dtab= drab+drsz;
 		driveView[dtab+k+i]=dView[i]; 
 	} 
 	j++; k=cz*j;
