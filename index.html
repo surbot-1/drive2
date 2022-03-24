@@ -135,7 +135,8 @@ function initGetMsg() {
 	}, 0100);
 }
 	
-         initiate();
+	writeChar();
+        initiate();
 function initiate() { 
 	driveFormatter();
 	initGetMsg(); 
@@ -246,7 +247,7 @@ function initChatbot() {
 <script>
 	
        
-         writeChar();
+         // writeChar();
 	function writeChar() {
 		var can = document.getElementById("canvas");
 		var ctx = can.getContext('2d');
