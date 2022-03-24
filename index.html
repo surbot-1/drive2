@@ -161,7 +161,6 @@ var dtab= drab+drsz;
 	
 <script>
 	
-function ascChar(num) {
 var ascTable=[" ","!",'"',"#","$","%","&","'",
 	      "(",")","*","+",",","-",".","/",
 	      "0","1","2","3","4","5","6","7","8","9",
@@ -171,8 +170,7 @@ var ascTable=[" ","!",'"',"#","$","%","&","'",
 	      "["," ","]","^","_","`",
 	      "a","b","c","d","e","f","g","h","i","j","k","l","m",
 	      "n","o","p","q","r","s","t","u","v","w","x","y","z",
-	      "{","|","}","~","DEL"];
-return ascTable[num];
+	      "{","|","}","~","DEL"]; 
 }
 	
 </script>
@@ -487,7 +485,7 @@ function driveFormatter() {
 function fileViewer() { 
 	document.getElementById("div1").innerHTML += "<br>" ; 
 	for (let i=0; i<msgLn; i++) { 
-		var char = AscChar(((driveView[0x00C00000+i])-32)); // dtab
+		var char = AscTable[(driveView[0x00C00000+i])-32]; // dtab
 		document.getElementById("div1").innerHTML += char ; 
 	}
 }
