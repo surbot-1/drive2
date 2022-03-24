@@ -82,11 +82,17 @@ var dBuf = new ArrayBuffer(512);
 var dView = new Uint8Array(dBuf);
 	
 var mbrsz_s=0x00000800; // (sectors) size of master boot record
+var mbrsz_b=0x00100000;
 var vbrsz_s=0x00000800; // (sectors) soze of partition boot record
+var vbrsz_b=0x00100000;
 var ftsz_s=0x00000800; // (sectors) fat table size 2048
+var ftsz_b=0x00100000;
 var dtab_c=0x00000800; // (absolute) data begin at cluster no. 2048
+var dtab_s=0x00100000;
 var dtab_b=0x00C00000; // data begin 
 var drsz_c=0x00000800; // (clusters) directory size 2048 
+var drsz_s=0x00004000;
+var drsz_b=0x00800000;
 var clsz_s=0x00000008; // (sectors) cluster size 4KB=4096B
 var clsz_b=0x00001000; // cluster size 4KB=4096B
 var scsz_b=0x00000200; // (Bytes) sector size 512B 
@@ -478,7 +484,7 @@ function driveFormatter() {
 function fileViewer() { 
 	document.getElementById("div1").innerHTML += "<br>" ; 
 	for (let i=0; i<msgLn; i++) { 
-		var char = AscTable[(driveView[dtab+i])-32];
+		var char = AscTable[(driveView[0x00C00000+i])-32]; // dtab
 		document.getElementById("div1").innerHTML += char ; 
 	}
 }
