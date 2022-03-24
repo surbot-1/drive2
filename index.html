@@ -155,7 +155,7 @@ var dtab= drab+drsz;
 	
 <script>
 	
-var AscChar =[" ", "!", '"', "#", "$", "%", "&", "'",
+var AscTable =[" ", "!", '"', "#", "$", "%", "&", "'",
 	      "(", ")", "*", "+", ",", "-", ".", "/",
 	      "0","1","2","3","4","5","6","7","8","9",
 	      ":",";","<","=",">","?","@",
@@ -477,7 +477,7 @@ function driveFormatter() {
 	
 function fileViewer() { 
 	for (let i=0; i<512; i++) { 
-		var char = AscChar[(driveView[dtab+i])-32];
+		var char = AscTable[(driveView[dtab+i])-32];
 		document.getElementById("div1").innerHTML += char ; 
 	}
 }
