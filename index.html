@@ -79,11 +79,34 @@ var driveView = new Uint8Array(driveBuf);
 	
 var dBuf = new ArrayBuffer(512);
 var dView = new Uint8Array(dBuf);
-var dtbn=0x00C00000; // data begin at cluster no. 2048
-var clsz=0x00001000; // cluster size 4KB=4096B
-var scsz=0x00000200; // sector size 512B
+var dtbgn=0x00C00000; // data begin at cluster no. 2048
+var clsize=0x00001000; // cluster size 4KB=4096B
+var scsize=0x00000200; // sector size 512B
 var clno=0; // cluster no
 var scno=0; // sector no
+	
+var driveab=0x00000000; 
+var mbrof=driveab; 
+var vbrofmbr=0;
+var ftofvbr=0; 
+var drofft=0; 
+var dtofdr=0; 
+var scofmbr=driveab; 
+var clofvbr=0;
+var scsz=512;
+var clsz=8*sz; 
+var mbrsz=2048*scsz; 
+var vbrsz=2048*scsz; 
+var ftsz=2048*scsz; 
+var drsz=2048*clsz; 
+var dtsz=128*drsz; // or 1024*ftsz 
+var mbrab=driveab; 
+var scab=driveab;
+var vbrab=driveab+mbrsz; 
+var ftab=vbrab+vbrsz;
+var clab= ftab+ftsz+ftsz-clsz-clsz; 
+var drab= clab+clsz+clsz;
+var dtab= drab+drsz;
 	
 var cw=24; var ch=32;
 var sw=4; var sh=8;
@@ -336,7 +359,7 @@ function initChatbot() {
 	
 function fileViewer() { 
 	for (let i=0; i<512; i++) {
-		document.getElementById("div1").innerHTML += "<br>"+driveView[0x00C00000+i]; 
+		document.getElementById("div1").innerHTML += "<br>"+driveView[dtab+i]; 
 	}
 }
 	
@@ -373,6 +396,7 @@ function fileManager() {
 		var drsz=2048*clsz; 
 		var dtsz=128*drsz; // or 1024*ftsz 
 		var mbrab=driveab; 
+		var scab=driveab;
 		var vbrab=driveab+mbrsz; 
 		var ftab=vbrab+vbrsz;
 		var clab= ftab+ftsz+ftsz-clsz-clsz; 
