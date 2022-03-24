@@ -357,15 +357,21 @@ function fileManager() {
 	var scno=0; // sector no 
 	var j=0; var k=0;
 	for (let i=0; i<512; i++) { 
-                var sz=512;
-                var cz=8*sz; 
-		var mz=2048*sz; 
-		var vz=2048*sz; 
-		var fz=2048*sz; 
-		var dz=2048*cz; 
-		var pos0c= mz+vz+fz+fz-cz-cz; 
-		var posdc= pos0c+cz+cz+dz;
-		driveView[posdc+k+i]=dView[i]; 
+		var driveab=0x00000000;
+                var scsz=512;
+                var clsz=8*sz; 
+		var mbrsz=2048*scsz; 
+		var vbrsz=2048*scsz; 
+		var ftsz=2048*scsz; 
+		var drsz=2048*clsz; 
+		var dtsz=128*drsz; // or 1024*ftsz 
+		var mbrab=driveab; 
+		var vbrab=driveab+mbrsz; 
+		var ftab=vbrab+vbrsz;
+		var clab= ftab+ftsz+ftsz-clsz-clsz; 
+		var drab= clab+clsz+clsz;
+		var dtab= drab+drsz;
+		driveView[dtab+k+i]=dView[i]; 
 	} 
 	j++; k=cz*j;
 }
