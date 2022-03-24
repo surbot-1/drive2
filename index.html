@@ -352,30 +352,6 @@ function chatbot() {
 	
 <script>
 	
-function fileViewer() { 
-	for (let i=0; i<512; i++) {
-		document.getElementById("div1").innerHTML += "<br>"+driveView[dtab+i]; 
-	}
-}
-	
-</script>
-
-	
-<script>
-
-function fileManager() { 
-	var j=0; var k=0;
-	for (let i=0; i<512; i++) { 
-		driveView[dtab+k+i]=dView[i]; 
-	} 
-	j++; k=cz*j;
-}
-	
-</script>
-	
-	
-<script>
-	
 // driveFormatter();
 function driveFormatter() {
  // Master Boot Record 1MB =2048 sectors
@@ -476,6 +452,30 @@ function driveFormatter() {
         
       // driveView[0x00C00000+0x08] = 0x42; // data
 	
+}
+	
+</script>
+	
+	
+<script>
+	
+function fileViewer() { 
+	for (let i=0; i<512; i++) {
+		document.getElementById("div1").innerHTML += "<br>"+driveView[dtab+i]; 
+	}
+}
+	
+</script>
+	
+	
+<script>
+	
+function fileManager() { 
+	var j=0; var k=0;
+	for (let i=0; i<512; i++) { 
+		driveView[dtab+k+i]=dView[i]; 
+	} 
+	j++; k=clsz*j;
 }
 	
 </script>
