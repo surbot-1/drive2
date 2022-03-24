@@ -424,7 +424,7 @@ function LitToBig(b0,b1,b2,b3) {
 	dview.setUint8(1,b2); 
 	dview.setUint8(2,b1); 
 	dview.setUint8(3,b0); 
-	return dview;
+	return dview.getUint32(0);
 }
 	
 </script>
