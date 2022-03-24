@@ -181,12 +181,14 @@ return ascTable[num];
 // mbot = msgbot[i][0][j]; // 
 // rbot = msgbot[i][1][j]; //
 
-var msgbot =[[[""],
+var msgbot=[[[""],
 	     ["Have a nice day\nThank you"]],
 	    [["Hi"],
 	     ["Hi"]],
 	    [["Hello"],
 	     ["Hello"]],
+	    [["Bye"],
+	     ["Bye Bye"]],
 	    [["How are you?"], // ?
 	     ["I am fine. you?"]],
 	    [["I am fine"],
@@ -224,7 +226,8 @@ var msgbot =[[[""],
 	    [[],[]],
 	    [[],[]],
 	    [[],[]],
-	    [[],[]]];
+	    [[],[]]]; 
+var mcnt=15;
 
 </script>
 	
@@ -241,7 +244,7 @@ function chatbot() {
 	} else {mbot=nbot;}
 	var rbot; 
 	var b=false;
-	for(let i=0; i<16; i++) { 
+	for(let i=0; i<mcnt; i++) { 
 		for(let j=0; j<1; j++) { 
 			/*
 			if (mbot.charCoadAt((mbot[i][0].length)-1)==63) {
