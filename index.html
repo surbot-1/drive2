@@ -477,7 +477,7 @@ function driveFormatter() {
 	
 function fileViewer() { 
 	for (let i=0; i<512; i++) { 
-		var char = AscChar((driveView[dtab+i])-32);
+		var char = AscChar[(driveView[dtab+i])-32];
 		document.getElementById("div1").innerHTML += char ; 
 	}
 }
